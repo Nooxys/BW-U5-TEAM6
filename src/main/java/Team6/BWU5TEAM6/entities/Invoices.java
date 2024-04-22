@@ -21,14 +21,14 @@ public class Invoices {
     private int number;
     private String state;
     @ManyToOne
-    private Customer customer;
+    private Client client;
 
 
-    public Invoices(Date date, double amount, int number, String state, Customer customer) {
+    public Invoices(Date date, double amount, int number, String state, Client client) {
         this.date = date;
         this.amount = amount;
         this.number = number;
         this.state = state;
-        this.customer = customer;
+        this.client = client;
     }
 }
