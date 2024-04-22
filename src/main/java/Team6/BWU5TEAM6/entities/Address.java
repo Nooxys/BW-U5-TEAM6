@@ -17,16 +17,16 @@ public class Address {
     private long id;
     @Getter
     @Setter
-    private String via;
+    private String street;
     @Getter
     @Setter
-    private String civico;
+    private String civicNumber;
     @Getter
     @Setter
-    private String localita;
+    private String locality;
     @Getter
     @Setter
-    private String cap;
+    private String postalCode;
 
     @Getter
     @Setter
@@ -34,18 +34,17 @@ public class Address {
     @JoinColumn(name = "comune_id", nullable = false)
     private Comune comune;
 
-    public Address(String via, String civico, String localita, String cap, Comune comune){
-       this.via = via; 
-       this.civico = civico;
-       this.localita= localita;
-       this.cap = cap;
-       this.comune = comune;
+    public Address(String street, String civicNumber, String locality, String postalCode, Comune comune){
+        this.street = street;
+        this.civicNumber = civicNumber;
+        this.locality = locality;
+        this.postalCode = postalCode;
+        this.comune = comune;
     }
 
-
-    //aggiunto metodo per ottenere indirizzo completo
-    public String getIndirizzoCompleto() {
-        return via + " " + civico + ", " + localita + ", " + comune.getNome() + " (" + comune.getProvincia().getSigla() + ") " + cap;
+    public String getFullAddress() {
+        return street + " " + civicNumber + ", " + locality + ", " + comune.getName() + " (" + comune.getProvince().getAcronym() + ") " + postalCode;
     }
 
 }
+
