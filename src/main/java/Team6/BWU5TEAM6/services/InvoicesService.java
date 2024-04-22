@@ -25,7 +25,7 @@ public class InvoicesService {
         return this.invoicesDAO.findAll(pageable);
     }
     public Invoices saveInvoices(NewInvoicesDTO body){
-        Invoices newInvoices = new Invoices(body.date(),body.amount(),body.number(),body.state(), body.customer());
+        Invoices newInvoices = new Invoices(body.date(),body.amount(),body.number(),body.state(), body.client());
         return invoicesDAO.save(newInvoices);
     }
     public Invoices findById(Long invoicesId){
@@ -37,7 +37,7 @@ public class InvoicesService {
         found.setAmount(updatedInvoices.getAmount());
         found.setNumber(updatedInvoices.getNumber());
         found.setState(updatedInvoices.getState());
-        found.setCustomer(updatedInvoices.getCustomer());
+        found.setClient(updatedInvoices.getClient());
         return this.invoicesDAO.save(found);
     }
     public void findByIdAndDelete(Long invoicesId){
