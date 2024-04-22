@@ -30,5 +30,51 @@ public class Address {
        this.comune = comune;
     }
 
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
+    }
+
+    public String getCivico() {
+        return civico;
+    }
+
+    public void setCivico(String civico) {
+        this.civico = civico;
+    }
+
+    public String getLocalita() {
+        return localita;
+    }
+
+    public void setLocalita(String localita) {
+        this.localita = localita;
+    }
+
+
+    public String getCap() {
+        return cap;
+    }
+
+    public void setCap(String cap) {
+        this.cap = cap;
+    }
+
+
+    public Comune getComune() {
+        return comune;
+    }
+
+    public void setComune(Comune comune) {
+        this.comune = comune;
+    }
+
+    //aggiunto metodo per ottenere indirizzo completo
+    public String getIndirizzoCompleto() {
+        return via + " " + civico + ", " + localita + ", " + comune.getNome() + " (" + comune.getProvincia().getSigla() + ") " + cap;
+    }
 
 }
