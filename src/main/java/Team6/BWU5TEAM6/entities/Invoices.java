@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
-import java.util.UUID;
+
 @Entity
 @Table(name = "invoices")
 @Data
@@ -24,7 +24,7 @@ public class Invoices {
     private Customer customer;
 
 
-    public Invoices( Date date, double amount, int number, String state, Customer customer) {
+    public Invoices(Date date, double amount, int number, String state, Customer customer) {
         this.date = date;
         this.amount = amount;
         this.number = number;

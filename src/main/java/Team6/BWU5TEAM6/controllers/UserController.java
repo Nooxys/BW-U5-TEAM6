@@ -12,6 +12,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/users")
@@ -38,6 +41,7 @@ public class UserController {
     public void deleteProfile(@AuthenticationPrincipal User currentUser) {
         this.us.findByIdAndDelete(currentUser.getId());
     }
+
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -67,6 +71,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findUserByIdAndDelete(@PathVariable long userId) {
         us.findByIdAndDelete(userId);
+    }
+
+    @PostMapping("me/upload")
+    public User uploadAvatar(@RequestParam("avatar") MultipartFile image, @AuthenticationPrincipal User currentUser) throws IOException {
+        return us.uploadImage(image, currentUser.getId());
+    }
+
+    @PostMapping("/upload/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public User uploadAvatar(@RequestParam("avatar") MultipartFile image, @PathVariable long userId) throws IOException {
+        return us.uploadImage(image, userId);
     }
 
 }
