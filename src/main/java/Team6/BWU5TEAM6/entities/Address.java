@@ -2,7 +2,9 @@ package Team6.BWU5TEAM6.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "addresses")
@@ -13,11 +15,21 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Getter
+    @Setter
     private String via;
+    @Getter
+    @Setter
     private String civico;
+    @Getter
+    @Setter
     private String localita;
+    @Getter
+    @Setter
     private String cap;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "comune_id", nullable = false)
     private Comune comune;
@@ -30,47 +42,6 @@ public class Address {
        this.comune = comune;
     }
 
-    public String getVia() {
-        return via;
-    }
-
-    public void setVia(String via) {
-        this.via = via;
-    }
-
-    public String getCivico() {
-        return civico;
-    }
-
-    public void setCivico(String civico) {
-        this.civico = civico;
-    }
-
-    public String getLocalita() {
-        return localita;
-    }
-
-    public void setLocalita(String localita) {
-        this.localita = localita;
-    }
-
-
-    public String getCap() {
-        return cap;
-    }
-
-    public void setCap(String cap) {
-        this.cap = cap;
-    }
-
-
-    public Comune getComune() {
-        return comune;
-    }
-
-    public void setComune(Comune comune) {
-        this.comune = comune;
-    }
 
     //aggiunto metodo per ottenere indirizzo completo
     public String getIndirizzoCompleto() {
