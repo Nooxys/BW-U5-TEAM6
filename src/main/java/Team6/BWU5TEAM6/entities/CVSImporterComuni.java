@@ -17,48 +17,50 @@ public class CVSImporterComuni {
         Properties props = new Properties();
         try {
             props.load(new FileInputStream("env.properties"));
-            System.out.println("Caricamento delle proprietà riuscito.");
+            System.out.println("Loading properties successful.");
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
         String pgUrl = props.getProperty("PG_URL");
         if (pgUrl == null || pgUrl.isEmpty()) {
-            System.err.println("L'URL di connessione al database non è stato trovato o è vuoto.");
+            System.err.println("The database connection URL was not found or is empty.");
             return;
         }
-        System.out.println("URL di connessione: " + pgUrl);
+        System.out.println("Connection URL: " + pgUrl);
         String pgUsername = props.getProperty("PG_USERNAME");
         String pgPassword = props.getProperty("PG_PASSWORD");
         try (Connection connection = DriverManager.getConnection(pgUrl, pgUsername, pgPassword)) {
             try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
                 String headerLine = br.readLine();
                 while ((line = br.readLine()) != null) {
-                    System.out.println("Riga letta: " + line);
+                    System.out.println("Read line: " + line);
                     String[] data = line.split(csvSplitBy);
-                    String id_provincia = data[0];
-                    String id = data[1];
-                    String comune = data[2];
-                    String provincia = data[3];
-                    String sql = "INSERT INTO comuni (id_provincia, id, comune, provincia) VALUES (?, ?, ?,?)";
+                    String id_district = data[0];
+                    String id_municipality = data[1];
+                    String municipality = data[2];
+                    String district = data[3];
+                    String sql = "INSERT INTO municipality (id_district, id_municipality, municipality, district) VALUES (?, ?, ?, ?)";
                     try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                        statement.setString(1, id_provincia);
-                        statement.setString(2, id);
-                        statement.setString(3, comune);
-                        statement.setString(4, provincia);
+                        statement.setString(1, id_district);
+                        statement.setString(2, id_municipality);
+                        statement.setString(3, municipality);
+                        statement.setString(4, district);
                         statement.executeUpdate();
                     }
-                    System.out.println("Inserimento avvenuto con successo!");
-                    System.out.println("Id_provincia: " + id_provincia);
-                    System.out.println("Id: " + id);
-                    System.out.println("Comune: " + comune);
-                    System.out.println("Provincia: " + provincia);
+                    System.out.println("Insertion successful!");
+                    System.out.println("Id_district: " + id_district);
+                    System.out.println("Id_municipality: " + id_municipality);
+                    System.out.println("Municipality: " + municipality);
+                    System.out.println("District: " + district);
                     System.out.println();
                 }
-                System.out.println("Importazione completata con successo!");
+                System.out.println("Import completed successfully!");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
+
