@@ -63,7 +63,4 @@ public class CSVImporterProvince {
             e.printStackTrace();
         }
     }
-
-    public static void importCSV() {
-    }
 }

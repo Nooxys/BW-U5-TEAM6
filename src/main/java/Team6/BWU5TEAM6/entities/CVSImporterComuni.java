@@ -61,9 +61,6 @@ public class CVSImporterComuni {
             e.printStackTrace();
         }
     }
-
-    public static void importCSV() {
-    }
 }
 
 
