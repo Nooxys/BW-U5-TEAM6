@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table (name = "clients")
+@Table(name = "clients")
 public class Client {
 
     @Id
@@ -38,5 +38,7 @@ public class Client {
     @JoinColumn(name = "user_id")
     private User user;
 
-
+    public Client(String email) {
+        this.email = email;
+    }
 }
