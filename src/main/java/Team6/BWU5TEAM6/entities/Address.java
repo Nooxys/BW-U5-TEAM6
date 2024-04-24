@@ -1,8 +1,8 @@
 package Team6.BWU5TEAM6.entities;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -14,36 +14,28 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private long id;
-    @Getter
-    @Setter
+
     private String street;
-    @Getter
-    @Setter
+
     private String civicNumber;
-    @Getter
-    @Setter
+
     private String locality;
-    @Getter
-    @Setter
+
     private String postalCode;
 
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "comune_id", nullable = false)
-    private Comune comune;
 
-    public Address(String street, String civicNumber, String locality, String postalCode, Comune comune){
+    @ManyToOne
+    @JoinColumn(name = "municipality_id", nullable = false)
+    private Municipality municipality;
+
+    public Address(String street, String civicNumber, String locality, String postalCode, Municipality municipality) {
         this.street = street;
         this.civicNumber = civicNumber;
         this.locality = locality;
         this.postalCode = postalCode;
-        this.comune = comune;
-    }
-
-    public String getFullAddress() {
-        return street + " " + civicNumber + ", " + locality + ", " + comune.getName() + " (" + comune.getProvince().getAcronym() + ") " + postalCode;
+        this.municipality = municipality;
     }
 
 }
