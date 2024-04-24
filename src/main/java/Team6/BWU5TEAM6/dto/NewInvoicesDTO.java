@@ -10,4 +10,7 @@ public record NewInvoicesDTO(@NotEmpty(message = "date required") Date date,
                              @NotEmpty(message = "number required") int number,
                              @NotEmpty(message = "state required") String state,
                              @NotEmpty(message = "costumer required") Client client) {
+    public NewInvoicesDTO {
+        state = "processing";
+    }
 }

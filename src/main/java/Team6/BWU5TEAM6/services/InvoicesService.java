@@ -59,7 +59,6 @@ public class InvoicesService {
         return invoicesDAO.findByDate(date, pageable);
     }
     public Page<Invoices> findByYear(int year, int page, int size, String sortBy) {
-        // Assuming you have a method in your DAO to filter by year
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByYear(year, pageable);
     }
