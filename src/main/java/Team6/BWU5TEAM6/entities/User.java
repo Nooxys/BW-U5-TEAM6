@@ -1,6 +1,7 @@
 package Team6.BWU5TEAM6.entities;
 
 import Team6.BWU5TEAM6.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -33,6 +34,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserType role;
     private String avatar;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Client> clients;
+
 
     public User(String username, String email, String password, String name, String surname) {
         this.username = username;
