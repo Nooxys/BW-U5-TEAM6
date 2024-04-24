@@ -1,10 +1,13 @@
 package Team6.BWU5TEAM6.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
@@ -24,6 +27,14 @@ public class Address {
     private String locality;
 
     private String postalCode;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "registered_office", cascade = CascadeType.ALL)
+    private List<Client> clientListRegisteredOffice;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "operational_headquarters", cascade = CascadeType.ALL)
+    private List<Client> clientListOperationalHeadquarters;
 
 
     @ManyToOne
