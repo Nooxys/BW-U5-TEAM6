@@ -1,7 +1,10 @@
 package Team6.BWU5TEAM6.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "addresses")
@@ -24,10 +27,10 @@ public class Address {
 
 
     @ManyToOne
-    @JoinColumn(name = "comune_id", nullable = false)
+    @JoinColumn(name = "municipality_id", nullable = false)
     private Municipality municipality;
 
-    public Address(String street, String civicNumber, String locality, String postalCode, Municipality municipality){
+    public Address(String street, String civicNumber, String locality, String postalCode, Municipality municipality) {
         this.street = street;
         this.civicNumber = civicNumber;
         this.locality = locality;
