@@ -1,9 +1,7 @@
 package Team6.BWU5TEAM6.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
@@ -15,20 +13,21 @@ import java.util.Date;
 public class Invoices {
     @Id
     @GeneratedValue
-    private long invoicesId;
+    @Setter(AccessLevel.NONE)
+    private long id;
     private Date date;
     private double amount;
     private int number;
     private String state;
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
 
-    public Invoices(Date date, double amount, int number, String state, Client client) {
+    public Invoices(Date date, double amount, int number, String state) {
         this.date = date;
         this.amount = amount;
         this.number = number;
         this.state = state;
-        this.client = client;
     }
 }
