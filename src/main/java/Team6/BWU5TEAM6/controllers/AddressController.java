@@ -48,7 +48,7 @@ public class AddressController {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleAddressNotFoundException(NotFoundException ex) {
+    public ResponseEntity<String> NotFoundException(NotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
