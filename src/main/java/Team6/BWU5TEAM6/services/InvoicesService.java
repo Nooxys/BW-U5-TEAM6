@@ -9,9 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 
-
+@Service
 public class InvoicesService {
 
     @Autowired
@@ -46,22 +48,27 @@ public class InvoicesService {
         Invoices found = this.findById(invoicesId);
         this.invoicesDAO.delete(found);
     }
+
     public Page<Invoices> findByClient(Long clientId, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByClientId(clientId, pageable);
     }
+
     public Page<Invoices> findByState(String state, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByState(state, pageable);
     }
+
     public Page<Invoices> findByDate(Date date, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByDate(date, pageable);
     }
+
     public Page<Invoices> findByYear(int year, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByYear(year, pageable);
     }
+
     public Page<Invoices> findByAmountRange(double minAmount, double maxAmount, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return invoicesDAO.findByAmountBetween(minAmount, maxAmount, pageable);

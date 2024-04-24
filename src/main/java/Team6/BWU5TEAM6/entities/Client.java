@@ -2,12 +2,14 @@ package Team6.BWU5TEAM6.entities;
 
 import Team6.BWU5TEAM6.enums.ClientType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -40,5 +42,23 @@ public class Client {
 
     public Client(String email) {
         this.email = email;
+    }
+
+    public Client(String businessName, int vatNumber, String email, LocalDate insertionDate, LocalDate lastContactDate, double annualTurnover, String pec, int telephone, String emailContact, String nameContact, int telephoneContact, String companyLogo, ClientType type, String address, User user) {
+        this.businessName = businessName;
+        this.vatNumber = vatNumber;
+        this.email = email;
+        this.insertionDate = insertionDate;
+        this.lastContactDate = lastContactDate;
+        this.annualTurnover = annualTurnover;
+        this.pec = pec;
+        this.telephone = telephone;
+        this.emailContact = emailContact;
+        this.nameContact = nameContact;
+        this.telephoneContact = telephoneContact;
+        this.companyLogo = companyLogo;
+        this.type = type;
+        this.address = address;
+        this.user = user;
     }
 }
