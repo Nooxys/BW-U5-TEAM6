@@ -1,13 +1,14 @@
 package Team6.BWU5TEAM6.entities;
 
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
 
 @NoArgsConstructor
 @Setter
@@ -19,7 +20,7 @@ public class District {
     private String sigla;
     private String district;
     private String region;
-    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "district")
     private List<Municipality> municipalities;
 
     public District(String sigla, String district, String region) {

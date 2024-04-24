@@ -16,19 +16,19 @@ public class Municipality {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private int id;
-    private int id_district;
-    private int id_municipality;
+    private String id_district;
+    private String id_municipality;
     private String name_municipality;
     private String name_district;
     @ManyToOne
-    @JoinColumn(name = "district_sigla", referencedColumnName = "sigla")
+    @JoinColumn(name = "district_sigla")
     private District district;
 
-
-    public Municipality(int id_district, int id_municipality, String name_municipality, String name_district) {
+    public Municipality(String id_district, String id_municipality, String name_municipality, String name_district, District district) {
         this.id_district = id_district;
         this.id_municipality = id_municipality;
         this.name_municipality = name_municipality;
         this.name_district = name_district;
+        this.district = district;
     }
 }
