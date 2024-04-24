@@ -22,7 +22,7 @@ public class InvoicesService {
     }
 
     public Invoices saveInvoices(NewInvoicesDTO body) {
-        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state());
+        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state(), body.client());
         return invoicesDAO.save(newInvoices);
     }
 
@@ -36,6 +36,7 @@ public class InvoicesService {
         found.setAmount(updatedInvoices.getAmount());
         found.setNumber(updatedInvoices.getNumber());
         found.setState(updatedInvoices.getState());
+        found.setClient(updatedInvoices.getClient());
         return this.invoicesDAO.save(found);
     }
 

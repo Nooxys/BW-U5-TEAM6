@@ -24,10 +24,11 @@ public class Invoices {
     private Client client;
 
 
-    public Invoices(Date date, double amount, int number, String state) {
+    public Invoices(Date date, double amount, int number, String state, Client client) {
         this.date = date;
         this.amount = amount;
         this.number = number;
         this.state = state;
+        this.client = client;
     }
 }
