@@ -1,6 +1,7 @@
 package Team6.BWU5TEAM6.entities;
 
 import Team6.BWU5TEAM6.enums.ClientType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -39,6 +41,19 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "registered_office_id")
+    private Address registered_office;
+
+    @ManyToOne
+    @JoinColumn(name = "operational_headquarters_id")
+    private Address operational_headquarters;
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Invoices> invoices;
+
 
     public Client(String email) {
         this.email = email;
