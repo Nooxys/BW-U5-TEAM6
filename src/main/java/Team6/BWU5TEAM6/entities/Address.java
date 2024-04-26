@@ -22,11 +22,11 @@ public class Address {
 
     private String street;
 
-    private String civicNumber;
+    private int civicNumber;
 
     private String locality;
 
-    private String postalCode;
+    private int postalCode;
 
     @JsonIgnore
     @OneToMany(mappedBy = "registered_office", cascade = CascadeType.ALL)
@@ -41,13 +41,19 @@ public class Address {
     @JoinColumn(name = "municipality_id", nullable = false)
     private Municipality municipality;
 
-    public Address(String street, String civicNumber, String locality, String postalCode, Municipality municipality) {
+    @ManyToOne
+    @JoinColumn(name = "district_id")
+    private District district;
+
+    public Address(String street, int civicNumber, String locality, int postalCode, Municipality municipality, District district) {
         this.street = street;
         this.civicNumber = civicNumber;
         this.locality = locality;
         this.postalCode = postalCode;
         this.municipality = municipality;
+        this.district = district;
     }
+
 
 }
 
