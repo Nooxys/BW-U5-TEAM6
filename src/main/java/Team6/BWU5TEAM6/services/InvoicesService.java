@@ -19,6 +19,9 @@ public class InvoicesService {
     @Autowired
     private InvoicesDAO invoicesDAO;
 
+    @Autowired
+    private ClientService cs;
+
     public Page<Invoices> getInvoicesList(int page, int size, String sortBy) {
         if (size > 50) size = 50;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -26,7 +29,7 @@ public class InvoicesService {
     }
 
     public Invoices saveInvoices(NewInvoicesDTO body) {
-        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state(), body.client());
+        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state(), cs.body.client());
         return invoicesDAO.save(newInvoices);
     }
 

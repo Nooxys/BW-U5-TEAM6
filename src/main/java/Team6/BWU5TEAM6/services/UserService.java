@@ -50,7 +50,7 @@ public class UserService {
                     throw new BadRequestException(" username " + user.getUsername() + " already  in use!");
                 });
         User newUser = new User(body.username(), body.email(), bcrypt.encode(body.password()), body.name(), body.surname());
-        mailgunSender.sendRegistrationEmail(newUser);
+//        mailgunSender.sendRegistrationEmail(newUser);
         return this.ud.save(newUser);
     }
 

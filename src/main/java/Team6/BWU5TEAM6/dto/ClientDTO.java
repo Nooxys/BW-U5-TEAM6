@@ -30,7 +30,7 @@ public record ClientDTO(
         int telephoneContact,
         @NotEmpty(message = "Company logo is required")
         String companyLogo,
-        @NotEmpty(message = "Type is required")
+//        @NotEmpty(message = "Type is required")
         ClientType type,
         @NotEmpty(message = "Address is required")
         String address
