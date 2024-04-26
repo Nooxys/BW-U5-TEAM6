@@ -1,5 +1,6 @@
 package Team6.BWU5TEAM6.controllers;
 
+import Team6.BWU5TEAM6.dto.AddressDTO;
 import Team6.BWU5TEAM6.entities.Address;
 import Team6.BWU5TEAM6.exceptions.NotFoundException;
 import Team6.BWU5TEAM6.services.AddressService;
@@ -30,13 +31,14 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Address> createAddress(@RequestBody Address address) {
-        Address createdAddress = addressService.createAddress(address);
+    public ResponseEntity<Address> createAddress(@RequestBody AddressDTO addressDTO) {
+        Address createdAddress = addressService.createAddress(addressDTO);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Address> updateAddress(@PathVariable("id") Long id, @RequestBody Address address) {
-        Address updatedAddress = addressService.updateAddress(id, address);
+    @PutMapping("/{id}")
+    public ResponseEntity<Address> updateAddress(@PathVariable("id") Long id, @RequestBody AddressDTO addressDTO) {
+        Address updatedAddress = addressService.updateAddress(id, addressDTO);
         return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
     }
 
@@ -48,7 +50,7 @@ public class AddressController {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> NotFoundException(NotFoundException ex) {
+    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 

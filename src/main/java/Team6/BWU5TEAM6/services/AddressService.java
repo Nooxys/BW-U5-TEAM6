@@ -1,5 +1,6 @@
 package Team6.BWU5TEAM6.services;
 
+import Team6.BWU5TEAM6.dto.AddressDTO;
 import Team6.BWU5TEAM6.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,11 @@ public class AddressService {
                 .orElseThrow(() -> new BadRequestException("Address not found with ID: " + id));
     }
 
-    public Address createAddress(Address address) {
+    public Address createAddress(AddressDTO address) {
         return addressDAO.save(address);
 
     }
-    public Address updateAddress(Long id, Address addressDetails) {
+    public Address updateAddress(Long id, AddressDTO addressDetails) {
         Address address = getAddressById(id);
         address.setStreet(addressDetails.getStreet());
         address.setCivicNumber(addressDetails.getCivicNumber());
@@ -39,6 +40,15 @@ public class AddressService {
     public void deleteAddress(Long id) {
         Address address = getAddressById(id);
         addressDAO.delete(address);
+    }
+    public Address convertToAddress(AddressDTO addressDTO) {
+        return new Address(
+                addressDTO.street(),
+                addressDTO.civicNumber(),
+                addressDTO.locality(),
+                addressDTO.postalCode(),
+                addressDTO.municipality().convertToMunicipality()
+        );
     }
 
 }
