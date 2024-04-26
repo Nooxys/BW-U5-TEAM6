@@ -15,8 +15,4 @@ public interface InvoicesDAO extends JpaRepository<Invoices, Long> {
     Page<Invoices> findByYear(@Param("year") int year, Pageable pageable);
     Page<Invoices> findByAmountBetween(double minAmount, double maxAmount, Pageable pageable);
 
-
-
-
-
 }

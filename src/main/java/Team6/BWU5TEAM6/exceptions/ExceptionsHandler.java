@@ -47,8 +47,21 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)               // 403
-    public ErrorsDTO handleForbidden(AccessDeniedException ex){
+    public ErrorsDTO handleForbidden(AccessDeniedException ex) {
         return new ErrorsDTO("You do not have access to this feature!", LocalDateTime.now());
+    }
+
+    @ExceptionHandler(CorrectDeleteDistrict.class)
+    @ResponseStatus(HttpStatus.OK)
+    public ErrorsDTO handleCorrectDelete(CorrectDeleteDistrict ex) {
+        return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
+    }
+
+
+    @ExceptionHandler(CorrectDeleteMunicipality.class)
+    @ResponseStatus(HttpStatus.OK)
+    public ErrorsDTO handleCorrectDelete(CorrectDeleteMunicipality ex) {
+        return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
     }
 
 

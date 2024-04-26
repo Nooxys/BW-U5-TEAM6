@@ -5,6 +5,7 @@ import Team6.BWU5TEAM6.entities.User;
 import Team6.BWU5TEAM6.exceptions.BadRequestException;
 import Team6.BWU5TEAM6.exceptions.NotFoundException;
 import Team6.BWU5TEAM6.repositories.UserDAO;
+import Team6.BWU5TEAM6.tools.MailgunSender;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserService {
     @Autowired
     private Cloudinary cloudinaryUploader;
 
+    @Autowired
+    private MailgunSender mailgunSender;
+
     public Page<User> getUsers(int page, int size, String sortBy) {
         if (size > 50) size = 50;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -46,6 +50,7 @@ public class UserService {
                     throw new BadRequestException(" username " + user.getUsername() + " already  in use!");
                 });
         User newUser = new User(body.username(), body.email(), bcrypt.encode(body.password()), body.name(), body.surname());
+//        mailgunSender.sendRegistrationEmail(newUser);
         return this.ud.save(newUser);
     }
 

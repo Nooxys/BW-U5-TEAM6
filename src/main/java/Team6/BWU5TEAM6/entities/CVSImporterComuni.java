@@ -38,21 +38,21 @@ public class CVSImporterComuni {
                     String[] data = line.split(csvSplitBy);
                     String id_district = data[0];
                     String id_municipality = data[1];
-                    String municipality = data[2];
-                    String district = data[3];
-                    String sql = "INSERT INTO municipality (id_district, id_municipality, municipality, district) VALUES (?, ?, ?, ?)";
+                    String name_municipality = data[2];
+                    String name_district = data[3];
+                    String sql = "INSERT INTO municipalities (id_district, id_municipality, name_municipality, name_district) VALUES (?, ?, ?, ?)";
                     try (PreparedStatement statement = connection.prepareStatement(sql)) {
                         statement.setString(1, id_district);
                         statement.setString(2, id_municipality);
-                        statement.setString(3, municipality);
-                        statement.setString(4, district);
+                        statement.setString(3, name_municipality);
+                        statement.setString(4, name_district);
                         statement.executeUpdate();
                     }
                     System.out.println("Insertion successful!");
                     System.out.println("Id_district: " + id_district);
                     System.out.println("Id_municipality: " + id_municipality);
-                    System.out.println("Municipality: " + municipality);
-                    System.out.println("District: " + district);
+                    System.out.println("Municipality: " + name_municipality);
+                    System.out.println("District: " + name_district);
                     System.out.println();
                 }
                 System.out.println("Import completed successfully!");
