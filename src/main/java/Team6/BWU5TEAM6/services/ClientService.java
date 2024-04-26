@@ -50,7 +50,7 @@ public class ClientService {
         client.setCompanyLogo(companyLogoUrl);
 
         client = clientDAO.save(client);
-        return new ClientResponseDTO(client.getBusinessName(), client.getEmail(), client.getType().toString());
+        return new ClientResponseDTO(client.getBusinessName(), client.getEmail());
     }
 
     public Page<Client> getClients(int page, int size, String sortBy) {
@@ -89,5 +89,34 @@ public class ClientService {
         return clientDAO.findByBusinessNameContaining(namePart, pageRequest);
     }
 
+    public Client findbyId(long id) {
+        return this.clientDAO.findById(id).orElseThrow(() -> new NotFoundException(id));
+    }
 
+    public Client findByIdAndUpdate(long id, ClientDTO body) throws IOException {
+        Map uploadResult = cloudinary.uploader().upload(body.companyLogo(), ObjectUtils.emptyMap());
+        String companyLogoUrl = (String) uploadResult.get("url");
+
+        Client found = this.findbyId(id);
+        found.setBusinessName(body.businessName());
+        found.setVatNumber(body.vatNumber());
+        found.setEmail(body.email());
+        found.setInsertionDate(body.insertionDate());
+        found.setLastContactDate(body.lastContactDate());
+        found.setAnnualTurnover(body.annualTurnover());
+        found.setPec(body.pec());
+        found.setTelephone(body.telephone());
+        found.setEmail(body.email());
+        found.setEmailContact(body.emailContact());
+        found.setNameContact(body.nameContact());
+        found.setTelephoneContact(body.telephoneContact());
+        found.setCompanyLogo(companyLogoUrl);
+        this.clientDAO.save(found);
+        return found;
+    }
+
+    public void findByIdAndDelete(long id) {
+        Client found = this.findbyId(id);
+        this.clientDAO.delete(found);
+    }
 }
