@@ -29,7 +29,7 @@ public class InvoicesService {
     }
 
     public Invoices saveInvoices(NewInvoicesDTO body) {
-        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state(), cs.body.client());
+        Invoices newInvoices = new Invoices(body.date(), body.amount(), body.number(), body.state(), cs.findbyId(body.client().getId()));
         return invoicesDAO.save(newInvoices);
     }
 
